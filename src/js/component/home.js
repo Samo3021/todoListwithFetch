@@ -22,6 +22,51 @@ export function Home() {
 		let newlist = arrayTareas.filter(item => item.id !== id);
 		setArrayTareas(newlist);
 	};
+	const postInfo = () => {
+		fetch("http://assets.breatheco.de/apis/fake/todos/user/SamuelCr", {
+			method: "POST",
+			body: JSON.stringify([]),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(resp => {
+				console.log(resp.ok); // Será true (verdad) si la respuesta es exitosa.
+				console.log(resp.status); // el código de estado = 200 o código = 400 etc.
+				console.log(resp.text()); // Intentará devolver el resultado exacto como cadena (string)
+				return resp.json(); // (regresa una promesa) will try to parse the result as json as return a promise that you can .then for results
+			})
+			.then(data => {
+				//Aquí es donde debe comenzar tu código después de que finalice la búsqueda
+				console.log(data); //esto imprimirá en la consola el objeto exacto recibido del servidor
+			})
+			.catch(error => {
+				//manejo de errores
+				console.log(error);
+			});
+	};
+	const getInfo = () => {
+		fetch("http://assets.breatheco.de/apis/fake/todos/user/SamuelCr", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(res => {
+				console.log(res.ok);
+				console.log(res.status);
+				console.log(res.text());
+				return res.json();
+			})
+			.then(data => {
+				console.log(data);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+	};
+	getInfo();
+	postInfo();
 
 	return (
 		<div>
